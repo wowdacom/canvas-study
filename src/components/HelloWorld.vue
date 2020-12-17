@@ -29,7 +29,6 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      board: null,
       boardInfo: {
         width: 641,
         height: 461,
@@ -65,13 +64,16 @@ export default {
   props: {
     msg: String,
   },
+  setup(props) {
+    console.log(props.title)
+  },
   mounted() {
-
+    // console.log(this.board)
     this.board = new fabric.Canvas("board", {
       width: this.boardInfo.width,
       height: this.boardInfo.height,
     });
-
+    console.log(this)
     this.initBackgroundBoard();
   },
   methods: {
@@ -109,8 +111,9 @@ export default {
       background.add(...dotlinesLongitude);
     },
     addImg(url) {
+      let _self = this
       fabric.Image.fromURL(url, (oImg) => {
-        this.board.add(oImg);
+        _self.board.add(oImg);
       });
     },
     clean() {
@@ -158,14 +161,12 @@ export default {
       let currentElement = this.board.getActiveObject(),
         angle = currentElement.angle;
 
-      console.log(currentElement.angle);
       currentElement.rotate(angle + 45);
       this.board.requestRenderAll();
     },
     rotateRight() {
       let currentElement = this.board.getActiveObject(),
         angle = currentElement.angle;
-      console.log(currentElement.angle);
       currentElement.rotate(angle - 45);
       this.board.requestRenderAll();
     },
