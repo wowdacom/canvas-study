@@ -1,58 +1,208 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <div class="container">
+      <canvas id="board"></canvas>
+      <canvas id="background"></canvas>
+    </div>
+    <div class="options">
+      <ul>
+        <li :key="item.imgSrc" @click="addImg(item.imgSrc)" v-for="item in fundamental">
+          <img :src="item.imgSrc" alt="" />{{ item.name }}
+        </li>
+      </ul>
+    </div>
+    <div class="buttons">
+      <button @click="clean">清除</button>
+      <button @click="copy">複製</button>
+      <button @click="remove">刪除</button>
+      <button @click="rotateLeft">向左旋轉45度</button>
+      <button @click="rotateRight">向右旋轉45度</button>
+      <button @click="save">儲存我的圖片</button>
+    </div>
   </div>
 </template>
 
 <script>
+import { fabric } from "fabric";
+
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
+  data() {
+    return {
+      board: null,
+      boardInfo: {
+        width: 641,
+        height: 461,
+      },
+      fundamental: [
+        {
+          name: "牆",
+          imgSrc: require("../assets/wall.svg"),
+        },
+        {
+          name: "陽台",
+          imgSrc: require("../assets/balcony.svg"),
+        },
+        {
+          name: "弧形",
+          imgSrc: require("../assets/arc.svg"),
+        },
+        {
+          name: "門",
+          imgSrc: require("../assets/door.svg"),
+        },
+        {
+          name: "窗",
+          imgSrc: require("../assets/window.svg"),
+        },
+        {
+          name: "開口",
+          imgSrc: require("../assets/interval.svg"),
+        },
+      ],
+    };
+  },
   props: {
-    msg: String
-  }
-}
+    msg: String,
+  },
+  mounted() {
+
+    this.board = new fabric.Canvas("board", {
+      width: this.boardInfo.width,
+      height: this.boardInfo.height,
+    });
+
+    this.initBackgroundBoard();
+  },
+  methods: {
+    initBackgroundBoard() {
+      let _self = this;
+
+      let background = new fabric.Canvas("background", {
+        width: _self.boardInfo.width,
+        height: _self.boardInfo.height,
+      });
+
+      let dotlinesLatitude = [],
+        dotlinesLongitude = [];
+
+      for (let i = 0; i < _self.boardInfo.height; i = i + 10) {
+        dotlinesLatitude.push(
+          new fabric.Line([0, i, _self.boardInfo.width, i], {
+            strokeDashArray: [1],
+            stroke: "black",
+          })
+        );
+      }
+
+      for (let j = 0; j < _self.boardInfo.width; j = j + 10) {
+        dotlinesLongitude.push(
+          new fabric.Line([j, 0, j, _self.boardInfo.height], {
+            strokeDashArray: [1],
+            stroke: "black",
+            selectable: false,
+          })
+        );
+      }
+
+      background.add(...dotlinesLatitude);
+      background.add(...dotlinesLongitude);
+    },
+    addImg(url) {
+      fabric.Image.fromURL(url, (oImg) => {
+        this.board.add(oImg);
+      });
+    },
+    clean() {
+      this.board.clear();
+    },
+    copy() {
+      this.board.getActiveObject().clone((cloned) => {
+          cloned.clone((clonedObj)=>{
+          this.board.discardActiveObject();
+          clonedObj.set({
+            left: clonedObj.left + 50,
+            top: clonedObj.top + 50,
+            evented: true,
+          });
+          if (clonedObj.type === 'activeSelection') {
+            // active selection needs a reference to the canvas.
+            clonedObj.canvas = this.board;
+            clonedObj.forEachObject((obj) => {
+              this.board.add(obj);
+            });
+            // this should solve the unselectability
+            clonedObj.setCoords();
+          } else {
+            this.board.add(clonedObj);
+          }
+          cloned.top += 50;
+          cloned.left += 50;
+          this.board.setActiveObject(clonedObj);
+          this.board.requestRenderAll();
+        })
+      });
+    },
+    remove() {
+      let delElement =
+        this.board.getActiveObject()._objects !== undefined
+          ? this.board.getActiveObject()._objects
+          : [this.board.getActiveObject()];
+      delElement.forEach((element) => {
+        this.board.remove(element);
+      });
+      this.board.discardActiveObject();
+      this.board.requestRenderAll();
+    },
+    rotateLeft() {
+      let currentElement = this.board.getActiveObject(),
+        angle = currentElement.angle;
+
+      console.log(currentElement.angle);
+      currentElement.rotate(angle + 45);
+      this.board.requestRenderAll();
+    },
+    rotateRight() {
+      let currentElement = this.board.getActiveObject(),
+        angle = currentElement.angle;
+      console.log(currentElement.angle);
+      currentElement.rotate(angle - 45);
+      this.board.requestRenderAll();
+    },
+    save() {},
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+<style lang="scss">
+.hello {
+  h3 {
+    margin: 40px 0 0;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  a {
+    color: #42b983;
+  }
+  .container {
+    position: relative;
+    width: 641px;
+    height: 461px;
+    .canvas-container:nth-child(1) {
+      z-index: 1;
+      position: absolute !important;
+    }
+    .canvas-container:nth-child(2) {
+      z-index: 0;
+      position: absolute !important;
+    }
+  }
 }
 </style>
