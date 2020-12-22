@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>洗手臺</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="洗手臺" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-7-Copy" transform="translate(2.000000, 9.000000)">
+            <ellipse id="Oval-4-Copy" stroke="#666666" cx="27.5" cy="21.5" rx="27.5" ry="21.5"></ellipse>
+            <circle id="Oval-5" stroke="#4A4A4A" cx="21.5" cy="7.5" r="2.5"></circle>
+            <circle id="Oval-5-Copy-2" stroke="#4A4A4A" cx="32.5" cy="7.5" r="2.5"></circle>
+            <circle id="Oval-5-Copy" stroke="#4A4A4A" cx="27.5" cy="23.5" r="2.5"></circle>
+            <path d="M27,4.5 C26.1715729,4.5 25.5,5.17157288 25.5,6 L25.5,17 C25.5,17.8284271 26.1715729,18.5 27,18.5 L27.5,18.5 C28.6045695,18.5 29.5,17.6045695 29.5,16.5 L29.5,6.5 C29.5,5.3954305 28.6045695,4.5 27.5,4.5 L27,4.5 Z" id="Rectangle-11" stroke="#666666"></path>
+            <path d="M25.4382376,12 C13.9781859,12.6730621 5,18.901687 5,26.4860022 C5,34.5196775 15.0735931,42 27.5,42 C39.9264069,42 50,34.5196775 50,26.4860022 C50,18.9633151 41.1671298,12.7743757 29.840631,12.0175056" id="Oval-4" stroke="#666666"></path>
+        </g>
+    </g>
+</svg>

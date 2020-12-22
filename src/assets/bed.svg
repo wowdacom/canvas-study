@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>床</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="床" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-20-Copy" transform="translate(6.000000, 4.000000)">
+            <g id="Group">
+                <rect id="Rectangle-12" stroke="#666666" x="0.5" y="0.5" width="47" height="51"></rect>
+                <path d="M0.372314453,3.50073242 C31.7404785,3.50073242 47.4245605,3.50073242 47.4245605,3.50073242 C47.4245605,3.50073242 31.7404785,3.50073242 0.372314453,3.50073242 Z" id="Line-3" stroke="#666666" stroke-linecap="square"></path>
+                <g id="Group-8" transform="translate(3.137931, 8.377049)" stroke="#666666">
+                    <path d="M1.36634143,7.95645605 L19.3883141,8.98021623 L19.3883141,1.14852813 L1.36634143,1.14852813 L1.36634143,7.95645605 Z" id="Rectangle-13"></path>
+                    <path d="M22.3560875,9.41636151 L39.3593529,12.5880751 L39.3593529,2.13491371 L22.3560875,2.13491371 L22.3560875,9.41636151 Z" id="Rectangle-13-Copy"></path>
+                </g>
+                <g id="Group-9" transform="translate(0.000000, 16.196721)">
+                    <path d="M0,0 C14.3028973,0.736848143 22.916713,1.3833553 25.8414473,1.93952148 C30.2285486,2.77377075 44.5361023,5.45973893 47.4316047,5.45973893" id="Path-4" stroke="#666666"></path>
+                    <path d="M0,7.36195243 L7.36567384,6.87730144 C13.3107269,6.12383012 17.8698992,6.12383012 21.0431907,6.87730144 C25.8031281,8.00750842 32.3416648,8.84869457 35.6846382,9.07456372 C37.9132871,9.22514316 41.8608107,9.79344917 47.5272091,10.7794818" id="Path-5" stroke="#4A4A4A"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

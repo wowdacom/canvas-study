@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>桌子</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="桌子" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2" transform="translate(1.000000, 1.000000)" stroke="#666666">
+            <path d="M11.5,11.5 L11.5,46.5 L46.5,46.5 L46.5,11.5 L11.5,11.5 Z" id="Rectangle-22"></path>
+            <path d="M17.5,17.5 L17.5,40.5 L40.5,40.5 L40.5,17.5 L17.5,17.5 Z" id="Rectangle-22"></path>
+            <g id="Group" transform="translate(0.000000, 22.000000)">
+                <path d="M4,10 L4,13" id="Line-9" stroke-linecap="square" transform="translate(4.000000, 11.500000) rotate(-90.000000) translate(-4.000000, -11.500000) "></path>
+                <path d="M4.125,7.875 L4.125,10.875" id="Line-9-Copy" stroke-linecap="square" transform="translate(4.125000, 9.500000) rotate(-90.000000) translate(-4.125000, -9.500000) "></path>
+                <path d="M3.8588562,6.09286499 L3.8588562,9.09286499" id="Line-9-Copy-2" stroke-linecap="square" transform="translate(3.858856, 7.451721) rotate(-90.000000) translate(-3.858856, -7.451721) "></path>
+                <path d="M4,4 L4,7" id="Line-9-Copy-3" stroke-linecap="square" transform="translate(4.000000, 5.500000) rotate(-90.000000) translate(-4.000000, -5.500000) "></path>
+                <path d="M-6,7 L-6,8.9759711 L9,8.99922429 L9,7 L-6,7 Z" id="Rectangle-24-Copy-6" transform="translate(1.500000, 8.000000) rotate(-90.000000) translate(-1.500000, -8.000000) "></path>
+                <path d="M2.99310303,11.006897 L13.006897,11.006897 L13.006897,6.04133817 L2.99310303,6.00853743 L2.99310303,11.006897 Z" id="Rectangle-24" transform="translate(8.000000, 8.506897) rotate(-90.000000) translate(-8.000000, -8.506897) "></path>
+            </g>
+            <g id="Group-Copy" transform="translate(52.500000, 29.500000) rotate(180.000000) translate(-52.500000, -29.500000) translate(47.000000, 21.000000)">
+                <path d="M4,10 L4,13" id="Line-9" stroke-linecap="square" transform="translate(4.000000, 11.500000) rotate(-90.000000) translate(-4.000000, -11.500000) "></path>
+                <path d="M4.125,7.875 L4.125,10.875" id="Line-9-Copy" stroke-linecap="square" transform="translate(4.125000, 9.500000) rotate(-90.000000) translate(-4.125000, -9.500000) "></path>
+                <path d="M3.8588562,6.09286499 L3.8588562,9.09286499" id="Line-9-Copy-2" stroke-linecap="square" transform="translate(3.858856, 7.451721) rotate(-90.000000) translate(-3.858856, -7.451721) "></path>
+                <path d="M4,4 L4,7" id="Line-9-Copy-3" stroke-linecap="square" transform="translate(4.000000, 5.500000) rotate(-90.000000) translate(-4.000000, -5.500000) "></path>
+                <path d="M-6.5,7.5 L-6.5,9.47592558 L9.5,9.49926996 L9.5,7.5 L-6.5,7.5 Z" id="Rectangle-24-Copy-6" transform="translate(1.500000, 8.500000) rotate(-90.000000) translate(-1.500000, -8.500000) "></path>
+                <path d="M2.99310303,11.006897 L13.006897,11.006897 L13.006897,6.04133817 L2.99310303,6.00853743 L2.99310303,11.006897 Z" id="Rectangle-24" transform="translate(8.000000, 8.506897) rotate(-90.000000) translate(-8.000000, -8.506897) "></path>
+            </g>
+            <g id="Group-Copy-2" transform="translate(29.500000, 5.500000) rotate(90.000000) translate(-29.500000, -5.500000) translate(24.000000, -3.000000)">
+                <path d="M4,10 L4,13" id="Line-9" stroke-linecap="square" transform="translate(4.000000, 11.500000) rotate(-90.000000) translate(-4.000000, -11.500000) "></path>
+                <path d="M4.125,7.875 L4.125,10.875" id="Line-9-Copy" stroke-linecap="square" transform="translate(4.125000, 9.500000) rotate(-90.000000) translate(-4.125000, -9.500000) "></path>
+                <path d="M3.8588562,6.09286499 L3.8588562,9.09286499" id="Line-9-Copy-2" stroke-linecap="square" transform="translate(3.858856, 7.451721) rotate(-90.000000) translate(-3.858856, -7.451721) "></path>
+                <path d="M4,4 L4,7" id="Line-9-Copy-3" stroke-linecap="square" transform="translate(4.000000, 5.500000) rotate(-90.000000) translate(-4.000000, -5.500000) "></path>
+                <path d="M-6.5,7.5 L-6.5,9.47592558 L9.5,9.49926996 L9.5,7.5 L-6.5,7.5 Z" id="Rectangle-24-Copy-6" transform="translate(1.500000, 8.500000) rotate(-90.000000) translate(-1.500000, -8.500000) "></path>
+                <path d="M2.99310303,11.006897 L13.006897,11.006897 L13.006897,6.04133817 L2.99310303,6.00853743 L2.99310303,11.006897 Z" id="Rectangle-24" transform="translate(8.000000, 8.506897) rotate(-90.000000) translate(-8.000000, -8.506897) "></path>
+            </g>
+            <g id="Group-Copy-3" transform="translate(29.500000, 52.500000) rotate(270.000000) translate(-29.500000, -52.500000) translate(24.000000, 44.000000)">
+                <path d="M4,10 L4,13" id="Line-9" stroke-linecap="square" transform="translate(4.000000, 11.500000) rotate(-90.000000) translate(-4.000000, -11.500000) "></path>
+                <path d="M4.125,7.875 L4.125,10.875" id="Line-9-Copy" stroke-linecap="square" transform="translate(4.125000, 9.500000) rotate(-90.000000) translate(-4.125000, -9.500000) "></path>
+                <path d="M3.8588562,6.09286499 L3.8588562,9.09286499" id="Line-9-Copy-2" stroke-linecap="square" transform="translate(3.858856, 7.451721) rotate(-90.000000) translate(-3.858856, -7.451721) "></path>
+                <path d="M4,4 L4,7" id="Line-9-Copy-3" stroke-linecap="square" transform="translate(4.000000, 5.500000) rotate(-90.000000) translate(-4.000000, -5.500000) "></path>
+                <path d="M-6.5,7.5 L-6.5,9.47592558 L9.5,9.49926996 L9.5,7.5 L-6.5,7.5 Z" id="Rectangle-24-Copy-6" transform="translate(1.500000, 8.500000) rotate(-90.000000) translate(-1.500000, -8.500000) "></path>
+                <path d="M2.99310303,11.006897 L13.006897,11.006897 L13.006897,6.04133817 L2.99310303,6.00853743 L2.99310303,11.006897 Z" id="Rectangle-24" transform="translate(8.000000, 8.506897) rotate(-90.000000) translate(-8.000000, -8.506897) "></path>
+            </g>
+        </g>
+    </g>
+</svg>
