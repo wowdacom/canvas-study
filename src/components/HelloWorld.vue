@@ -3,9 +3,14 @@
     <div class="container">
       <div class="left">
         <ul class="menu">
-          <li @click="changeOptions(item.id)" :key="item.id" v-for="item in menu">
+          <li
+            @click="changeOptions(item.id)"
+            :key="item.id"
+            v-for="item in menu"
+          >
             {{ item.name }}
           </li>
+          <li><input type="text" /></li>
         </ul>
         <ul v-if="currentOption === 'words'" class="options">
           <li class="option" :key="item.name" v-for="item in currentOptions">
@@ -43,15 +48,12 @@
 
 <script>
 import { fabric } from "fabric";
+import { onMounted } from "vue";
 
 export default {
   name: "HelloWorld",
   data() {
     return {
-      boardInfo: {
-        width: 641,
-        height: 461,
-      },
       currentOption: "fundamental",
       menu: [
         {
@@ -158,99 +160,44 @@ export default {
     // a computed getter
     currentOptions() {
       // `this` points to the vm instance
-      return this[this.currentOption]
-    }
-  },
-  setup(props) {
-    console.log(props.title);
-  },
-  mounted() {
-    this.board = new fabric.Canvas("board", {
-      width: this.boardInfo.width,
-      height: this.boardInfo.height,
-    });
-
-    this.board.on("object:modified", (e) => {
-      console.log(e);
-      if (e.target.getBoundingRect().left < 0 && e.target.getBoundingRect().top < 0) {
-        e.target.left = 0;
-        e.target.top = 0;
-        e.target.setCoords();
-      } else if (
-        e.target.getBoundingRect().left < 0 &&
-        e.target.getBoundingRect().top >
-          this.boardInfo.height - e.target.height * e.scaleX
-      ) {
-        e.target.left = 0;
-        e.target.top = this.boardInfo.height - e.target.height * e.scaleY;
-        e.target.setCoords();
-      } else if (
-        e.target.getBoundingRect().top < 0 &&
-        e.target.getBoundingRect().left >
-          this.boardInfo.width - e.target.width * e.scaleX
-      ) {
-        e.target.top = 0;
-        e.target.left = this.boardInfo.width - e.target.width * e.scaleX;
-        e.target.setCoords();
-      } else if (
-        e.target.getBoundingRect().left >
-          this.boardInfo.width - e.target.width * e.scaleX &&
-        e.target.getBoundingRect().top >
-          this.boardInfo.height - e.target.height * e.scaleY
-      ) {
-        e.target.left = this.boardInfo.width - e.target.width * e.scaleX;
-        e.target.top = this.boardInfo.height - e.target.height * e.scaleY;
-        e.target.setCoords();
-      } else if (e.target.getBoundingRect().left < 0) {
-        e.target.left = 0;
-        e.target.setCoords();
-      } else if (e.target.getBoundingRect().top < 0) {
-        e.target.top = 0;
-        e.target.setCoords();
-      } else if (
-        e.target.getBoundingRect().left >
-        this.boardInfo.width - e.target.width * e.scaleX
-      ) {
-        e.target.left = this.boardInfo.width - e.target.width * e.scaleX;
-        e.target.setCoords();
-      } else if (
-        e.target.getBoundingRect().top >
-        this.boardInfo.height - e.target.height * e.scaleY
-      ) {
-        e.target.top = this.boardInfo.height - e.target.height * e.scaleY;
-        e.target.setCoords();
-      }
-    });
-
-    this.initBackgroundBoard();
-  },
-  methods: {
-    changeOptions(id) {
-      this.currentOption = id
+      return this[this.currentOption];
     },
-    initBackgroundBoard() {
-      let _self = this;
+  },
+  setup() {
+    const boardInfo = {
+      width: 641,
+      height: 461,
+    };
+    var board = null,
+      background = null;
 
-      let background = new fabric.Canvas("background", {
-        width: _self.boardInfo.width,
-        height: _self.boardInfo.height,
+    onMounted(() => {
+      // console.log(background);
+      background = new fabric.Canvas("background", {
+        width: boardInfo.width,
+        height: boardInfo.height,
       });
 
-      let dotlinesLatitude = [],
+      board = new fabric.Canvas("board", {
+        width: boardInfo.width,
+        height: boardInfo.height,
+      });
+
+      const dotlinesLatitude = [],
         dotlinesLongitude = [];
 
-      for (let i = 0; i < _self.boardInfo.height; i = i + 10) {
+      for (let i = 0; i < boardInfo.height; i = i + 10) {
         dotlinesLatitude.push(
-          new fabric.Line([0, i, _self.boardInfo.width, i], {
+          new fabric.Line([0, i, boardInfo.width, i], {
             strokeDashArray: [1],
             stroke: "black",
           })
         );
       }
 
-      for (let j = 0; j < _self.boardInfo.width; j = j + 10) {
+      for (let j = 0; j < boardInfo.width; j = j + 10) {
         dotlinesLongitude.push(
-          new fabric.Line([j, 0, j, _self.boardInfo.height], {
+          new fabric.Line([j, 0, j, boardInfo.height], {
             strokeDashArray: [1],
             stroke: "black",
             selectable: false,
@@ -260,25 +207,79 @@ export default {
 
       background.add(...dotlinesLatitude);
       background.add(...dotlinesLongitude);
-    },
-    addImg(url) {
-      let _self = this;
-      fabric.Image.fromURL(url, (oImg) => {
-        _self.board.add(oImg);
+
+      board.on("object:modified", (e) => {
+        if (
+          e.target.getBoundingRect().left < 0 &&
+          e.target.getBoundingRect().top < 0
+        ) {
+          e.target.left = 0;
+          e.target.top = 0;
+          e.target.setCoords();
+        } else if (
+          e.target.getBoundingRect().left < 0 &&
+          e.target.getBoundingRect().top >
+            boardInfo.height - e.target.height * e.scaleX
+        ) {
+          e.target.left = 0;
+          e.target.top = boardInfo.height - e.target.height * e.scaleY;
+          e.target.setCoords();
+        } else if (
+          e.target.getBoundingRect().top < 0 &&
+          e.target.getBoundingRect().left >
+            boardInfo.width - e.target.width * e.scaleX
+        ) {
+          e.target.top = 0;
+          e.target.left = boardInfo.width - e.target.width * e.scaleX;
+          e.target.setCoords();
+        } else if (
+          e.target.getBoundingRect().left >
+            boardInfo.width - e.target.width * e.scaleX &&
+          e.target.getBoundingRect().top >
+            boardInfo.height - e.target.height * e.scaleY
+        ) {
+          e.target.left = boardInfo.width - e.target.width * e.scaleX;
+          e.target.top = boardInfo.height - e.target.height * e.scaleY;
+          e.target.setCoords();
+        } else if (e.target.getBoundingRect().left < 0) {
+          e.target.left = 0;
+          e.target.setCoords();
+        } else if (e.target.getBoundingRect().top < 0) {
+          e.target.top = 0;
+          e.target.setCoords();
+        } else if (
+          e.target.getBoundingRect().left >
+          boardInfo.width - e.target.width * e.scaleX
+        ) {
+          e.target.left = boardInfo.width - e.target.width * e.scaleX;
+          e.target.setCoords();
+        } else if (
+          e.target.getBoundingRect().top >
+          boardInfo.height - e.target.height * e.scaleY
+        ) {
+          e.target.top = boardInfo.height - e.target.height * e.scaleY;
+          e.target.setCoords();
+        }
       });
-    },
-    addText(text) {
-      let _self = this;
+    });
+
+    function addImg(url) {
+      fabric.Image.fromURL(url, (oImg) => {
+        board.add(oImg);
+      });
+    }
+    function addText(text) {
       let t = new fabric.Textbox(text);
-      _self.board.add(t);
-    },
-    clean() {
-      this.board.clear();
-    },
-    copy() {
-      this.board.getActiveObject().clone((cloned) => {
+      board.add(t);
+    }
+    function clean() {
+      board.clear();
+    }
+
+    function copy() {
+      board.getActiveObject().clone((cloned) => {
         cloned.clone((clonedObj) => {
-          this.board.discardActiveObject();
+          board.discardActiveObject();
           clonedObj.set({
             left: clonedObj.left + 50,
             top: clonedObj.top + 50,
@@ -286,45 +287,64 @@ export default {
           });
           if (clonedObj.type === "activeSelection") {
             // active selection needs a reference to the canvas.
-            clonedObj.canvas = this.board;
+            clonedObj.canvas = board;
             clonedObj.forEachObject((obj) => {
-              this.board.add(obj);
+              board.add(obj);
             });
             // this should solve the unselectability
             clonedObj.setCoords();
           } else {
-            this.board.add(clonedObj);
+            board.add(clonedObj);
           }
           cloned.top += 50;
           cloned.left += 50;
-          this.board.setActiveObject(clonedObj);
-          this.board.requestRenderAll();
+          board.setActiveObject(clonedObj);
+          board.requestRenderAll();
         });
       });
-    },
-    remove() {
+    }
+
+    function remove() {
       let delElement =
-        this.board.getActiveObject()._objects !== undefined
-          ? this.board.getActiveObject()._objects
-          : [this.board.getActiveObject()];
+        board.getActiveObject()._objects !== undefined
+          ? board.getActiveObject()._objects
+          : [board.getActiveObject()];
       delElement.forEach((element) => {
-        this.board.remove(element);
+        board.remove(element);
       });
-      this.board.discardActiveObject();
-      this.board.requestRenderAll();
-    },
-    rotateLeft() {
-      let currentElement = this.board.getActiveObject(),
+      board.discardActiveObject();
+      board.requestRenderAll();
+    }
+
+    function rotateLeft() {
+      let currentElement = board.getActiveObject(),
         angle = currentElement.angle;
 
-      currentElement.rotate(angle + 45);
-      this.board.requestRenderAll();
-    },
-    rotateRight() {
-      let currentElement = this.board.getActiveObject(),
-        angle = currentElement.angle;
       currentElement.rotate(angle - 45);
-      this.board.requestRenderAll();
+      board.requestRenderAll();
+    }
+
+    function rotateRight() {
+      let currentElement = board.getActiveObject(),
+        angle = currentElement.angle;
+      currentElement.rotate(angle + 45);
+      board.requestRenderAll();
+    }
+
+    return {
+      addImg,
+      addText,
+      clean,
+      copy,
+      remove,
+      rotateLeft,
+      rotateRight,
+    };
+  },
+  mounted() {},
+  methods: {
+    changeOptions(id) {
+      this.currentOption = id;
     },
     save() {},
   },
@@ -344,6 +364,7 @@ export default {
       .menu {
         display: flex;
         justify-content: center;
+        border: solid 1px red;
         li {
           list-style: none;
           padding: 10px;
@@ -366,7 +387,6 @@ export default {
             border: solid 1px gray;
             width: 60px;
             line-height: 60px;
-            
           }
         }
       }
@@ -382,6 +402,7 @@ export default {
         .canvas-container:nth-child(1) {
           z-index: 1;
           position: absolute !important;
+          border: solid 1px green;
         }
         .canvas-container:nth-child(2) {
           z-index: 0;
